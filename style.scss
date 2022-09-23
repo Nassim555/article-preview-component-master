@@ -140,7 +140,7 @@ img {
   .social {
     position: absolute;
     background-color: var(--Very-Dark-Grayish-Blue);
-    display: flex;
+    display: none;
     justify-content: flex-start;
     align-items: center;
     color: #ffff;
@@ -151,10 +151,15 @@ img {
     margin: 0;
     padding: 1.125rem 2.25rem;
     gap: 1rem;
-    animation: fade-out 300ms ease-in-out forwards;
     box-shadow: 0 18px 50px 0 lighten(hsl(212, 23%, 69%), 18%);
+    &.closing {
+      display: flex;
+      animation: fade-out 300ms ease-in-out forwards;
+      pointer-events: none;
+    }
     &.show {
       animation: fade-in 300ms ease-in-out forwards;
+      display: flex;
     }
 
     @media screen and (min-width: 56.25rem) {
@@ -195,9 +200,12 @@ img {
     }
     &__item {
       width: 1.25rem;
-      transition: transform 250ms ease-in-out;
-      &:hover {
-        transform: translateY(-0.5rem);
+
+      &:hover img {
+        transform: translateY(-0.4rem);
+      }
+      img {
+        transition: transform 300ms ease-in-out;
       }
     }
   }
@@ -208,21 +216,17 @@ img {
 
 @keyframes fade-in {
   from {
-    visibility: hidden;
     opacity: 0;
   }
   to {
-    visibility: visible;
     opacity: 1;
   }
 }
 @keyframes fade-out {
   from {
-    visibility: visible;
     opacity: 1;
   }
   to {
-    visibility: hidden;
     opacity: 0;
   }
 }
